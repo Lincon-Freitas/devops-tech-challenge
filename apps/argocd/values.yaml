@@ -9,7 +9,7 @@ logging:
 
 global:
   image:
-    tag: v2.4.28
+    tag: v3.0.12
 
 server:
   extensions:
