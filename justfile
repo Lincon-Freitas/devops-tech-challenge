@@ -28,13 +28,15 @@ argocd_release_name := "argocd"
 argocd_release_namespace := "argocd"
 argocd_values_file := helm_apps_dir + "/" + argocd_release_name + "/values.yaml"
 argocd_url := "http://argocd.apps.127.0.0.1.nip.io"
+argocd_app_path := "argocd/application.yaml"
+argocd_app_name := "app-of-apps"
 
 # 📚 Information from recipes available
 default:
     @just --list
 
 # 🚀 Provision a Kubernetes cluster with required dependencies
-provision: _check-kind _check-nginx _check-argocd argocd-url
+provision: _check-kind _check-nginx _check-argocd _check-argocd-deploy argocd-url
 
 _check-kind:
     #!/usr/bin/env bash
@@ -103,6 +105,27 @@ _check-argocd: _repo-argocd _kind-update-context
     elif [[ `just _status-argocd` == "1" ]]; then
         just _update-argocd
     fi
+
+# Decide if app-of-apps should be applied or not
+_check-argocd-deploy:
+    #!/usr/bin/env bash
+    set -e
+    if [[ `just _status-argocd-deploy` == "0" ]]; then
+        just _apply-argocd-deploy
+    else
+        echo 'ArgoCD {{ argocd_app_name }} app was already applied! 🚀'
+    fi
+
+# Check whether the app-of-apps is already applied
+_status-argocd-deploy:
+    #!/usr/bin/env bash
+    set -e
+    app_status=`kubectl get applications -A -o name | grep "app-of-apps" | wc -l`
+    echo $app_status
+
+# Apply the app-of-apps manifest
+_apply-argocd-deploy:
+    @kubectl apply -f {{ argocd_app_path }}
 
 # Add helm repository
 _add-helm-repo repo_name repo_url:
