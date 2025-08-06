@@ -17,7 +17,7 @@ spec:
       - $values/apps/postgres/values.yaml
     
   - repoURL: https://github.com/Lincon-Freitas/devops-tech-challenge
-    targetRevision: ops/argocd-configuration
+    targetRevision: HEAD
     ref: values
 
   destination:
