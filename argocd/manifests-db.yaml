@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Lincon-Freitas/devops-tech-challenge
-    targetRevision: ops/argocd-configuration
+    targetRevision: HEAD
     path: manifests/postgres/
     directory:
       recurse: true
