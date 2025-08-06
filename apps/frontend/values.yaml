@@ -1,0 +1,62 @@
+image:
+  repository: gigpops/fe-applet
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+nameOverride: ""
+fullnameOverride: "fe-applet"
+
+podSecurityContext:
+  fsGroup: 2000
+  runAsNonRoot: true
+  runAsUser: 1000
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 3000
+
+ingress:
+  enabled: true
+  hosts:
+    - host: todo-list.apps.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+  limits:
+      memory: 512Mi # OOMKilled in 256Mi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+
+disruption:
+  enabled: true
+  minAvailable: 1
+
+topologySpreadConstraints:
+  enabled: true
+  maxSkew: 1
+
+configMap:
+  enabled: true
+  data:
+    REACT_APP_BACKEND_API_BASE_URL: "http://todo-api.apps.127.0.0.1.nip.io"

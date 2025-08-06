@@ -1,0 +1,57 @@
+image:
+  repository: gigpops/be-applet
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+nameOverride: ""
+fullnameOverride: "be-applet"
+
+podSecurityContext:
+  fsGroup: 2000
+  runAsNonRoot: true
+  runAsUser: 1000
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 8000
+
+ingress:
+  enabled: true
+  hosts:
+    - host: todo-api.apps.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+  limits:
+      memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+
+disruption:
+  enabled: true
+  minAvailable: 1
+
+topologySpreadConstraints:
+  enabled: true
+  maxSkew: 1
