@@ -145,3 +145,11 @@ configMap:
 secret:
   enabled: false
   secretName: ""
+
+# This accepts any values from the `env` config: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
+env:
+#  - name: FOO
+#    valueFrom:
+#      secretKeyRef:
+#        name: bar
+#        key: foobar

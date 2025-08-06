@@ -55,3 +55,19 @@ disruption:
 topologySpreadConstraints:
   enabled: true
   maxSkew: 1
+
+configMap:
+  enabled: true
+  data:
+    DATABASE_URL: "$(uri)"
+
+secret:
+  enabled: false
+  secretName: ""
+
+env:
+  - name: DATABASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: db-applet-app
+        key: uri

@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manifests
+  namespace: argocd
+  finalizers:
+    - argoproj.io/resources-finalizer
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Lincon-Freitas/devops-tech-challenge
+    targetRevision: ops/argocd-configuration
+    path: manifests/postgres/
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: todo-list
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: false
+    syncOptions:
+      - CreateNamespace=true

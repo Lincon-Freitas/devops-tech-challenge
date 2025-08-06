@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fe-applet
+  namespace: argocd
+  finalizers:
+    - argoproj.io/resources-finalizer
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Lincon-Freitas/devops-tech-challenge
+    targetRevision: ops/argocd-configuration
+    path: helm-chart
+    helm:
+      valueFiles:
+      - ../apps/frontend/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: todo-list
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: false
+    syncOptions:
+      - CreateNamespace=true

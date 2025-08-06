@@ -31,7 +31,7 @@ ingress:
 
 resources:
   limits:
-      memory: 512Mi # OOMKilled in 256Mi
+      memory: 1Gi # OOMKilled in 512Mi
   requests:
     cpu: 100m
     memory: 512Mi
