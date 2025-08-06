@@ -13,12 +13,14 @@ spec:
       {{- include "helm-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-        {{- if .Values.configMap.enabled }}
+      {{- end }}
+      {{- if .Values.configMap.enabled }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        {{- end }}
+      {{- else }}
+        checksum/config: nil
       {{- end }}
       labels:
         {{- include "helm-chart.labels" . | nindent 8 }}
@@ -47,15 +49,20 @@ spec:
             - name: http
               containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
-          {{- if .Values.configMap.enabled }}
+          {{- if or .Values.configMap.enabled .Values.secret.enabled }}
           envFrom:
+          {{- end }}
+          {{- if .Values.configMap.enabled }}
             - configMapRef:
                 name: {{ include "helm-chart.fullname" . }}
           {{- end }}
           {{- if .Values.secret.enabled }}
-          envFrom:
             - secretRef:
                 name: {{ .Values.secret.secretName }}
+          {{- end }}
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
