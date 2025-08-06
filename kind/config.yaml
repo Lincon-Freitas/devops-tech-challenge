@@ -19,7 +19,13 @@ nodes:
       protocol: TCP
 - role: worker
   image: kindest/node:v1.33.2@sha256:c55080dc5be4f2cc242e6966fdf97bb62282e1cd818a28223cf536db8b0fddf4
+  labels: 
+    node: node1
 - role: worker
   image: kindest/node:v1.33.2@sha256:c55080dc5be4f2cc242e6966fdf97bb62282e1cd818a28223cf536db8b0fddf4
+  labels: 
+    node: node2
 - role: worker
   image: kindest/node:v1.33.2@sha256:c55080dc5be4f2cc242e6966fdf97bb62282e1cd818a28223cf536db8b0fddf4
+  labels: 
+    node: node3
