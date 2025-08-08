@@ -62,3 +62,8 @@ env:
       secretKeyRef:
         name: db-applet-app
         key: uri
+
+initContainers:
+  - name: check-db-applet
+    image: busybox:stable
+    command: ['sh', '-c', 'until nc -z db-applet-rw 5432; do echo "waiting for database...""; sleep 2; done']
