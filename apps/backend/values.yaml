@@ -36,14 +36,6 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-startupProbe:
-  httpGet:
-    host: db-applet-rw
-    path: /
-    port: 80
-  failureThreshold: 24
-  periodSeconds: 5
-
 autoscaling:
   enabled: false
 
