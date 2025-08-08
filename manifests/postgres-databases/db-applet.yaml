@@ -2,8 +2,12 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: db-applet
+  labels:
+    app: db-applet
 spec:
-  instances: 2
-
+  inheritedMetadata:
+    labels:
+      app: db-applet
+  instances: 1
   storage:
     size: 1Gi
