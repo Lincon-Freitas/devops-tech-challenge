@@ -1,18 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgres-databases
+  name: postgres
   namespace: argocd
   finalizers:
     - argoproj.io/resources-finalizer
 spec:
   project: default
-  source:
-    repoURL: https://github.com/Lincon-Freitas/devops-tech-challenge
+  sources:
+  - chart: postgresql
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 16.7.20
+    helm:
+      releaseName: postgres
+      valueFiles:
+      - $values/apps/postgres/values.yaml
+    
+  - repoURL: https://github.com/Lincon-Freitas/devops-tech-challenge
     targetRevision: HEAD
-    path: manifests/postgres-databases/
-    directory:
-      recurse: true
+    ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: todo-list

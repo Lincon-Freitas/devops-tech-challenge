@@ -1,2 +1,5 @@
-config:
-  clusterWide: false
+commonLabels:
+  app: db-applet
+primary:
+  persistence:
+    size: 1Gi
