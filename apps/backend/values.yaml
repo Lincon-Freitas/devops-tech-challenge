@@ -48,9 +48,7 @@ topologySpreadConstraints:
   maxSkew: 1
 
 configMap:
-  enabled: true
-  data:
-    DATABASE_URL: "$(uri)"
+  enabled: false
 
 secret:
   enabled: false
