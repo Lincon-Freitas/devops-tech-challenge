@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: be-applet-binding
+  namespace: todo-list
+subjects:
+- kind: ServiceAccount
+  name: be-applet
+  namespace: todo-list
+roleRef:
+  kind: Role
+  name: be-applet-role
+  apiGroup: rbac.authorization.k8s.io
