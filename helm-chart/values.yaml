@@ -153,3 +153,6 @@ env:
 #      secretKeyRef:
 #        name: bar
 #        key: foobar
+
+# Add initContainers to the main Deployment: https://kubernetes.io/docs/concepts/workloads/pods/init-containers
+initContainers: {}
