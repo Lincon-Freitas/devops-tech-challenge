@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-applet
+  namespace: todo-list
+spec:
+  podSelector:
+    matchLabels:
+      app: db-applet
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: be-applet
+      ports:
+        - protocol: TCP
+          port: 5432
+
