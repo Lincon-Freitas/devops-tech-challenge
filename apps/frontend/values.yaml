@@ -55,5 +55,5 @@ configMap:
 initContainers:
   - name: check-be-applet
     image: busybox:stable
-    command: ['sh', '-c', 'until nc -z be-applet 80; do echo "waiting for backend...""; sleep 2; done']
+    command: ['sh', '-c', 'until nc -z be-applet 80; do echo "waiting for backend..."; sleep 2; done']
 
