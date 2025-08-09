@@ -54,4 +54,4 @@ secret:
 initContainers:
   - name: check-db-applet
     image: busybox:stable
-    command: ['sh', '-c', 'until nc -z db-applet-rw 5432; do echo "waiting for database..."; sleep 2; done']
+    command: ['sh', '-c', 'until nc -z postgres-postgresql 5432; do echo "waiting for database..."; sleep 2; done']
