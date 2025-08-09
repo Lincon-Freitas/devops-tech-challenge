@@ -47,19 +47,9 @@ topologySpreadConstraints:
   enabled: true
   maxSkew: 1
 
-configMap:
-  enabled: false
-
 secret:
-  enabled: false
-  secretName: ""
-
-env:
-  - name: DATABASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: db-applet-app
-        key: uri
+  enabled: true
+  secretName: "be-applet"
 
 initContainers:
   - name: check-db-applet
