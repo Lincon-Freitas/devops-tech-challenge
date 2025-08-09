@@ -60,10 +60,6 @@ spec:
             - secretRef:
                 name: {{ .Values.secret.secretName }}
           {{- end }}
-          {{- with .Values.env }}
-          env:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
