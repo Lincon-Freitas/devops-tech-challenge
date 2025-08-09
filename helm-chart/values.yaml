@@ -141,18 +141,10 @@ configMap:
   data: {}
 #   FOO: "BAR"
 
-# Configure a secret to be mounted to the Pods. Not all types of secrets are support as the key-value pairs will be mounted as env variables.
+# Configure a secret to be mounted to the Pods. Not all types of secrets are supported as the key-value pairs will be mounted as env variables.
 secret:
   enabled: false
   secretName: ""
-
-# This accepts any values from the `env` config: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
-env:
-#  - name: FOO
-#    valueFrom:
-#      secretKeyRef:
-#        name: bar
-#        key: foobar
 
 # Add initContainers to the main Deployment: https://kubernetes.io/docs/concepts/workloads/pods/init-containers
 initContainers: {}
