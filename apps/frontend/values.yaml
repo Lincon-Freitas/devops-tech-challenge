@@ -31,13 +31,18 @@ ingress:
 
 resources:
   limits:
-      memory: 1Gi # OOMKilled in 512Mi
+      memory: 512Mi
   requests:
     cpu: 100m
     memory: 512Mi
 
 autoscaling:
-  enabled: false
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
 
 disruption:
   enabled: true
