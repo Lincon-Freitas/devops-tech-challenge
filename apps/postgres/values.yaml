@@ -1,7 +1,5 @@
 commonLabels:
   app: db-applet
-commonAnnotations:
-  argocd.argoproj.io/sync-wave: "-1"
 primary:
   persistence:
     size: 1Gi
