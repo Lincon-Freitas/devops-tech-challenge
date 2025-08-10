@@ -1,3 +1,7 @@
+global:
+  postgresql:
+    auth:
+      postgresPassword: "ByKaKHKpZK"
 commonLabels:
   app: db-applet
 primary:
