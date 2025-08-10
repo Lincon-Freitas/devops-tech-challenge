@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: postgres
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
   finalizers:
     - argoproj.io/resources-finalizer
 spec:
