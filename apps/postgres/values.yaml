@@ -5,5 +5,7 @@ global:
 commonLabels:
   app: db-applet
 primary:
+  networkPolicy:
+    enabled: false
   persistence:
     size: 1Gi
